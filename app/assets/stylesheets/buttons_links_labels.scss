@@ -1,0 +1,54 @@
+@import './colors.scss';
+
+a {
+  text-decoration: none;
+}
+
+.sm-btn {
+  display: inline-block;
+  background-color: $alabaster;
+  border: 1px solid $alabaster;
+  border-radius: 1rem;
+  color: $smoky-black;
+  padding: .5rem;
+  transition: .2s ease;
+  text-align: center;
+  font-size: .9rem;
+  line-height: 1rem;
+}
+
+.sm-btn:hover,
+.sm-btn:focus {
+  background-color: $smoky-black;
+  color: $alabaster;
+  cursor: pointer;
+}
+
+.negative-link {
+  color: $alabaster;
+  transition: .1s;
+}
+
+.negative-link:hover,
+.negative-link:focus {
+  color: $alabaster;
+  border-bottom: 2px solid $alabaster;
+  cursor: pointer;
+}
+
+.negative-btn {
+  background-color: $smoky-black;
+  border: 1px solid $smoky-black;
+  color: $alabaster;
+}
+
+.negative-btn:hover,
+.negative-btn:focus {
+  background-color: $alabaster;
+  color: $smoky-black
+}
+
+.primary-btn {
+  background-color: $yellow-green-crayola;
+  font-weight: 700;
+}

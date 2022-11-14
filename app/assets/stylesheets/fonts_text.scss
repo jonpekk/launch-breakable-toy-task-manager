@@ -1,0 +1,39 @@
+@import './colors.scss';
+
+$ubuntu: 'Ubuntu', sans-serif;
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: $alabaster;
+  margin: 0;
+}
+
+.positive {
+  color: $smoky-black
+}
+
+.negative {
+  color: $alabaster
+}
+
+.lg-header {
+  font-size: 2rem;
+}
+
+.md-header {
+  font-size: 1.75rem;
+}
+
+.sm-header {
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.eyebrow {
+  font-size: .9rem;
+  opacity: .75;
+}

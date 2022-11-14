@@ -1,0 +1,25 @@
+@import './colors.scss';
+@import './buttons_links_labels.scss';
+@import './fonts_text.scss';
+
+.board-index-container {
+  background-color: $smoky-black;
+  border-radius: 1rem;
+  padding: 1rem;
+  margin: 1rem 0;
+}
+
+.board-tile {
+  background-color: $alabaster;
+  border-radius: .5rem;
+  padding: .5rem;
+  margin: .5rem 0;
+
+  span {
+    font-weight: 700;
+  }
+
+  .tile-body {
+    margin-top: 1rem;
+  }
+}
