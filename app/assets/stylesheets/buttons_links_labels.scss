@@ -17,6 +17,13 @@ a {
   line-height: 1rem;
 }
 
+.sm-btn:hover,
+.sm-btn:focus {
+  background-color: $smoky-black;
+  color: $alabaster;
+  cursor: pointer;
+}
+
 .negative-link {
   color: $alabaster;
   transition: .1s;
@@ -29,11 +36,16 @@ a {
   cursor: pointer;
 }
 
-.sm-btn:hover,
-.sm-btn:focus {
+.negative-btn {
   background-color: $smoky-black;
+  border: 1px solid $smoky-black;
   color: $alabaster;
-  cursor: pointer;
+}
+
+.negative-btn:hover,
+.negative-btn:focus {
+  background-color: $alabaster;
+  color: $smoky-black
 }
 
 .primary-btn {

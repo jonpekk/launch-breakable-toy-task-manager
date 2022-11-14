@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react'
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import BoardList from './BoardList';
+import SignIn from './SignIn';
 
 export const App = (props) => {
   const [userInfo, setUserInfo] = useState({
-    user: "",
+    email: "",
     boards: []
   })
 
@@ -29,7 +31,17 @@ export const App = (props) => {
   }, [])
 
   return (
-    <BoardList userInfo={userInfo} />
+    <BrowserRouter>
+      <Switch>
+        <Route exact path="/">
+          <BoardList userInfo={userInfo} />
+        </Route>
+        <Route exact path="/users/sign-in">
+          <SignIn userInfo={userInfo} />
+        </Route>
+
+      </Switch>
+    </BrowserRouter>
   )
 }
 
