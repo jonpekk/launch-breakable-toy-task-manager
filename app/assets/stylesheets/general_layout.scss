@@ -1,0 +1,54 @@
+@import './colors.scss';
+@import './fonts_text.scss';
+
+* {
+  box-sizing: border-box;
+  color: $smoky-black;
+  font-family: $ubuntu;
+}
+
+body {
+  background-color: $gold-fusion;
+  padding: 1rem;
+}
+
+.top-nav {
+  height: 3rem;
+  padding: 0 .5rem;
+  background-color: $smoky-black;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.top-nav-section {
+  height: 100%;
+  margin-bottom: 1.25rem;
+
+  .right {
+    background-color: inherit;
+    padding-top: .25rem;
+
+    li {
+      margin-right: 1rem;
+      display: inline;
+      list-style: none;
+    }
+  }
+
+  @media screen and (max-width: 40em) {
+    margin-bottom: 2rem 0;
+  }
+
+}
+
+.top-body-section {
+  h2 {
+    font-family: $ubuntu;
+  }
+}
+
+.app {
+  max-width: 1200px;
+  margin: .5rem auto;
+}

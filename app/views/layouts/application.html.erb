@@ -1,23 +1,26 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>LaunchBreakableToyTaskManager</title>
+  <title>BreakableToyStyles</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <%= stylesheet_link_tag 'application', media: 'all' %>
   <%= csrf_meta_tags %>
+  <%= stylesheet_link_tag 'application', media: 'all' %>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap" rel="stylesheet">
 </head>
 <body>
   
-  <nav class="top-bar">
-    <h1><a href="/">LaunchBreakableToyTaskManager</a></h1>
+  <nav class="top-nav">
+    <h1 class="lg-header"><a class="negative-link" href="/">Mello</a></h1>
 
-    <section class="top-bar-section">
+    <section class="top-nav-section">
       <ul class="right">
         <%- if current_user -%>
-          <li><%= link_to 'Sign Out', destroy_user_session_path, method: :delete %></li>
+          <li><%= link_to 'Sign Out', destroy_user_session_path, method: :delete, class: 'negative-link' %></li>
         <%- else -%>
-          <li><%= link_to 'Sign Up', new_user_registration_path %></li>
-          <li><%= link_to 'Sign In', new_user_session_path %></li>
+          <li><%= link_to 'Sign Up', new_user_registration_path, class: 'negative-link' %></li>
+          <li><%= link_to 'Sign In', new_user_session_path, class: 'negative-link' %></li>
         <%- end -%>
       </ul>
     </section>
@@ -29,7 +32,9 @@
     </div>
   <%- end -%>
 
-  <%= yield %>
+  <div class="app cell-block-container">
+    <%= yield %>
+  </div>
 
   <%= javascript_include_tag 'application' %>
   
