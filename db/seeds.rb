@@ -1,6 +1,16 @@
 user_1 = User.create(email: "test@test.com", password: "testtest")
+user_2 = User.create(email: "user2@test.com", password: "secondTest")
 
 board_1 = Board.create(name: "Test Board", shortcode: "TEST", description: "Just testing the board creation", user: User.first)
 board_2 = Board.create(name: "Test Board", shortcode: "TEST", description: "Just testing the board creation", user: User.first)
 board_3 = Board.create(name: "Test Board", shortcode: "TEST", description: "Just testing the board creation", user: User.first)
 board_4 = Board.create(name: "Test Board", shortcode: "TEST", description: "Just testing the board creation", user: User.first)
+
+card_1 = Card.create(name: "This is a test task", status: 0, board: Board.first)
+card_2 = Card.create(name: "This is a test task", status: 0, board: Board.first)
+card_3 = Card.create(name: "This is a test task", status: 0, board: Board.first)
+card_4 = Card.create(name: "This is a test task", status: 1, board: Board.first)
+card_5 = Card.create(name: "This is a test task", status: 1, board: Board.first)
+card_6 = Card.create(name: "This is a test task", status: 2, board: Board.first)
+card_7 = Card.create(name: "This is a test task", status: 3, board: Board.first)
+card_8 = Card.create(name: "This is a test task", status: 3, board: Board.first)

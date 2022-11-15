@@ -12,8 +12,14 @@ body {
   padding: 1rem;
 }
 
+ul,
+ol {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
 .top-nav {
-  height: 3rem;
   padding: 0 .5rem;
   background-color: $smoky-black;
   display: flex;
@@ -23,7 +29,6 @@ body {
 
 .top-nav-section {
   height: 100%;
-  margin-bottom: 1.25rem;
 
   .right {
     background-color: inherit;
@@ -51,11 +56,4 @@ body {
 .app {
   max-width: 1200px;
   margin: .5rem auto;
-}
-
-.error-message {
-  background-color: $yellow-green-crayola;
-  padding: 1rem;
-  border-radius: .5rem;
-  font-weight: 700;
 }

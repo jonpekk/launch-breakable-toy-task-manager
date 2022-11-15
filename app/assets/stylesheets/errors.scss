@@ -1,0 +1,18 @@
+@import './colors.scss';
+
+.alone {
+  margin-top: 5rem;
+}
+
+.error-message {
+  background-color: $yellow-green-crayola;
+  padding: 1rem;
+  border-radius: .5rem;
+  font-weight: 700;
+}
+
+.error-buttons {
+  a {
+    margin: .5rem;
+  }
+}
