@@ -5,10 +5,7 @@ import Board from './Board';
 import SignIn from './SignIn';
 
 export const App = (props) => {
-  const [userInfo, setUserInfo] = useState({
-    email: "",
-    boards: []
-  })
+  const [userInfo, setUserInfo] = useState(undefined)
 
   const getUser = async () => {
     try {
@@ -19,7 +16,11 @@ export const App = (props) => {
         throw (error)
       } else {
         const responseBody = await response.json()
-        setUserInfo(responseBody)
+        if (responseBody) {
+          setUserInfo(responseBody)
+        } else {
+          setUserInfo(null)
+        }
       }
 
     } catch (err) {

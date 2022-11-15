@@ -1,5 +1,6 @@
 class Board < ApplicationRecord
   belongs_to :user
+  has_many :cards
 
   validates :name, :shortcode, :user, presence: true
   validates :shortcode, length: { minimum: 2}

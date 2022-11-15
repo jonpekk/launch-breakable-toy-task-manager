@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       get'/current-user', to: "current_user#index"
-      resources :boards, only: [:show]
+      resources :boards, only: [:index, :show]
     end
   end
 end

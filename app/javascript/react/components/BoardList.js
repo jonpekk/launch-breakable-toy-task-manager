@@ -1,10 +1,33 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import BoardTile from './BoardTile';
 
 const BoardList = ({ userInfo }) => {
 
-  if (!userInfo) {
+  const [boards, setBoards] = useState([])
+
+  const getBoards = async () => {
+    try {
+      const response = await fetch('/api/v1/boards')
+      if (!response.ok) {
+        const errorMessage = `${response.status} - ${response.statusText}`
+        const error = new Error(errorMessage)
+        throw (error)
+      } else {
+        const responseBody = await response.json()
+        setBoards(responseBody)
+      }
+
+    } catch (err) {
+      console.log(`Error! ${err}`)
+    }
+  }
+
+  useEffect(() => {
+    getBoards()
+  }, [])
+
+  if (userInfo === null) {
     return (
       <div className="error-message alone">
         <p className=''>Hi! Looks like you either aren't logged in or are not signed into the correct account. Please sign in or sign up to create a board!</p>
@@ -12,7 +35,7 @@ const BoardList = ({ userInfo }) => {
       </div>
     )
   } else {
-    let boardList = userInfo.boards.map((board) => {
+    const boardList = boards.map((board) => {
       return (
         <BoardTile
           name={board.name}
@@ -27,7 +50,7 @@ const BoardList = ({ userInfo }) => {
 
     return (
       <Fragment>
-        <h2>Welcome {userInfo.email}!</h2>
+        <h2>Welcome!</h2>
         <ul className='board-index-container grid-x grid-margin-x'>
           {boardList}
         </ul>

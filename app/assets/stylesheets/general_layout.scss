@@ -12,8 +12,14 @@ body {
   padding: 1rem;
 }
 
+ul,
+ol {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
 .top-nav {
-  height: 3rem;
   padding: 0 .5rem;
   background-color: $smoky-black;
   display: flex;
@@ -23,7 +29,6 @@ body {
 
 .top-nav-section {
   height: 100%;
-  margin-bottom: 1.25rem;
 
   .right {
     background-color: inherit;

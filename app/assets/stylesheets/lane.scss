@@ -1,0 +1,50 @@
+  @import './colors.scss';
+  @import './fonts_text.scss';
+
+  .todo-list-card {
+    background-color: $smoky-black;
+    border-radius: 1rem;
+    border: 0;
+    overflow: hidden;
+    max-width: 300px;
+    max-height: 82vh;
+
+    .card-section {
+      padding-bottom: 8rem;
+    }
+
+    .card-divider {
+      border-bottom: 2px solid $gold-fusion;
+      background: inherit;
+      display: flex;
+      justify-content: space-between;
+      padding: .5rem;
+
+      h3 {
+        color: $alabaster;
+        font-family: $ubuntu;
+        font-size: 1.1rem;
+        font-weight: 700;
+        margin-bottom: 0;
+      }
+    }
+
+    .card {
+      border-radius: .5rem;
+      margin-right: .25rem;
+      font-size: .85rem;
+    }
+
+    ul {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+
+      li {
+        background-color: $alabaster;
+        color: $smoky-black;
+        margin: .5rem 0;
+        padding: .5rem;
+      }
+    }
+  }
