@@ -71,7 +71,7 @@ const Board = (props) => {
   })
 
   return (
-    <div className="grid-x">
+    <div>
       < DndProvider backend={HTML5Backend} >
         <section className="top-body-section">
           <h2 className="sm-header">{board.name}</h2>
@@ -86,9 +86,14 @@ const Board = (props) => {
         onRequestClose={handleClose}
         shouldCloseOnOverlayClick={true}
         shouldCloseOnEsc={true}
-        className="card-editor-section large-8"
+        overlayClassName="editor-section grid-x overlay-styles"
+        className="editor-container large-6 medium-8 small-12 large-offset-3 medium-offset-2"
       >
-        <ModalContent />
+        <ModalContent
+          handleClose={handleClose}
+          board={board}
+          setBoard={setBoard}
+        />
       </ReactModal>
     </div >
   )

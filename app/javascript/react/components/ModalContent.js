@@ -1,26 +1,66 @@
-import React from "react";
+import React, { useState } from "react";
+import { withRouter } from "react-router-dom";
 
-const ModalContent = () => {
+const ModalContent = (props) => {
+
+  const [formFields, setFormFields] = useState({
+    name: "",
+    board: props.match.params.id
+  })
+
+  const createTask = async (payload) => {
+    try {
+      const response = await fetch('/api/v1/cards', {
+        credentials: "same-origin",
+        method: "POST",
+        body: JSON.stringify(payload),
+        headers: {
+          "Accept": "application/json",
+          "Content-type": "application/json"
+        }
+      })
+      if (!response.ok) {
+        const errorMessage = `${response.status} ${response.statusText}`
+        const error = new Error(`Error! ${errorMessage}`)
+        throw (error)
+      } else {
+        const responseBody = await response.json()
+        props.setBoard(responseBody)
+      }
+    } catch (err) {
+      console.log(err)
+    }
+  }
+
+  const handleSubmit = (event) => {
+    event.preventDefault()
+    createTask(formFields)
+    props.handleClose()
+  }
+
+  const handleInput = event => {
+    setFormFields({
+      ...formFields,
+      [event.currentTarget.name]: event.currentTarget.value
+    })
+  }
 
   return (
-    <div className="card-editor-container">
-      <div className="columns card-editor-section-right">
-        <h2 className="md-header">Create/Edit ticket #101</h2>
-        <form className="card-editor-form">
-          <input type="text" placeholder="Task title" />
-          <textarea name="description" id="" rows="10" placeholder="Type your description here"></textarea>
-          <div className="card-editor-form-actions">
-            <div>
-              <label htmlFor="FileUpload" className="button card-editor-file-button">Attach Files</label>
-              <input type="file" id="FileUpload" className="show-for-sr" />
-            </div>
-            <input type="submit" className="button" value="Send it" />
-            <input type="button" className="button" value="discard" />
-          </div>
-        </form>
+    <div className="columns editor-section-right">
+      <div className="form-header">
+        <h2 className="md-header">Create Task</h2>
+        <button className="close-button" onClick={props.handleClose} title="Close Editor">x</button>
       </div>
+      <form className="editor-form" onSubmit={handleSubmit}>
+        <label htmlFor="name">Task name</label>
+        <input id="name" className="input-field" name="name" type="text" value={formFields.name} placeholder="Task Title Here!" onChange={handleInput} />
+        <div className="editor-form-actions">
+          <input type="submit" className="sm-btn primary-btn" value="Send it" />
+          <input type="button" onClick={props.handleClose} className="sm-btn" value="discard" />
+        </div>
+      </form>
     </div>
   )
 }
 
-export default ModalContent
+export default withRouter(ModalContent)
