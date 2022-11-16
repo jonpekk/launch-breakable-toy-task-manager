@@ -1,5 +1,4 @@
 RSpec.configure do |config|
-
   # before each test suite, dump the database completely
   config.before(:suite) do
     DatabaseCleaner.clean_with(:truncation)

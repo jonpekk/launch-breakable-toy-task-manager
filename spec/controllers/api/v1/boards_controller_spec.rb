@@ -14,7 +14,6 @@ RSpec.describe Api::V1::BoardsController, type: :controller do
 
       get :index
       returned_json = JSON.parse(response.body)
-      expect(response.content_type).to eq("application/json")
 
       expect(returned_json.length).to eq(1)
     end
