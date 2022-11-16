@@ -2,11 +2,11 @@ require 'rails_helper'
 
 RSpec.describe Api::V1::CardsController, type: :controller do
 
-  user_1 = User.create(email: "test@test.com", password: "testtest")
+  let!(:user_1){User.create(email: "test@test.com", password: "testtest")}
 
-  board_1 = Board.create(name: "Test Board", shortcode: "TEST", description: "Just testing the board creation", user: User.first)
+  let!(:board_1){Board.create(name: "Test Board", shortcode: "TEST", description: "Just testing the board creation", user: User.first)}
 
-  card_1 = Card.create(name: "This is a test task", status: 0, board: Board.first)
+  let!(:card_1){Card.create(name: "This is a test task", status: 0, board: Board.first)}
 
   describe "PATCH#update" do
     context "User makes a valid request" do
