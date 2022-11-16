@@ -3,7 +3,10 @@ import { withRouter, Link, Redirect } from "react-router-dom";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import _ from 'lodash'
+import ReactModal from "react-modal";
+import Modal from "react-modal";
 import Column from "./Column";
+import ModalContent from "./ModalContent";
 
 const Board = (props) => {
 
@@ -11,10 +14,18 @@ const Board = (props) => {
     return <Redirect to='/' />
   }
 
+  Modal.setAppElement('#app');
+
   const [board, setBoard] = useState({
     user: {},
     cards: []
   })
+
+  const [modalStatus, setModalStatus] = useState(true)
+
+  const handleClose = () => {
+    setModalStatus(false)
+  }
 
   const getBoard = async () => {
     try {
@@ -60,14 +71,26 @@ const Board = (props) => {
   })
 
   return (
-    <DndProvider backend={HTML5Backend}>
-      <section className="top-body-section">
-        <h2 className="sm-header">{board.name}</h2>
-      </section>
-      <ul className="board-container grid-margin-x grid-x cell-block grid-frame">
-        {columnList}
-      </ul>
-    </DndProvider>
+    <div className="grid-x">
+      < DndProvider backend={HTML5Backend} >
+        <section className="top-body-section">
+          <h2 className="sm-header">{board.name}</h2>
+        </section>
+        <ul className="board-container grid-margin-x grid-x cell-block grid-frame">
+          {columnList}
+        </ul>
+      </DndProvider >
+      <ReactModal
+        isOpen={modalStatus}
+        contentLabel={"Create new task"}
+        onRequestClose={handleClose}
+        shouldCloseOnOverlayClick={true}
+        shouldCloseOnEsc={true}
+        className="card-editor-section large-8"
+      >
+        <ModalContent />
+      </ReactModal>
+    </div >
   )
 }
 
