@@ -1,9 +1,15 @@
 import React, { Fragment, useEffect, useState } from "react"
-import { Redirect, withRouter, Link } from "react-router-dom";
+import { withRouter, Link, Redirect } from "react-router-dom";
+import { DndProvider } from "react-dnd";
+import { HTML5Backend } from "react-dnd-html5-backend";
 import _ from 'lodash'
 import Column from "./Column";
 
 const Board = (props) => {
+
+  if (props.userInfo === null) {
+    return <Redirect to='/' />
+  }
 
   const [board, setBoard] = useState({
     user: {},
@@ -31,14 +37,11 @@ const Board = (props) => {
     getBoard()
   }, [])
 
-  if (props.userInfo !== undefined && board.user && board.user.id !== props.userInfo.id) {
+  if (props.userInfo !== undefined && board.user.id !== props.userInfo.id) {
     return (
       <div className="error-message alone">
         <p className=''>Woops! You don't have access to that board! Please sign in to the correct account or to to the homepage to see what boards you have access to</p>
-        <div className="error-buttons">
-          <Link className="sm-btn negative-btn" to='/users/sign-in'>Sign in!</Link>
-          <Link className="sm-btn negative-btn" to='/'>Take me home!</Link>
-        </div>
+        <Link className="sm-btn negative-btn" to='/'>Take me home!</Link>
       </div>
     )
   }
@@ -52,19 +55,19 @@ const Board = (props) => {
     })
 
     return (
-      <Column name={column} cards={cards} key={column} />
+      <Column name={column} cards={cards} key={column} setBoard={setBoard} />
     )
   })
 
   return (
-    <Fragment>
+    <DndProvider backend={HTML5Backend}>
       <section className="top-body-section">
         <h2 className="sm-header">{board.name}</h2>
       </section>
       <ul className="board-container grid-margin-x grid-x cell-block grid-frame">
         {columnList}
       </ul>
-    </Fragment>
+    </DndProvider>
   )
 }
 

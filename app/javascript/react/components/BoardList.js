@@ -30,7 +30,7 @@ const BoardList = ({ userInfo }) => {
   if (userInfo === null) {
     return (
       <div className="error-message alone">
-        <p className=''>Hi! Looks like you either aren't logged in or are not signed into the correct account. Please sign in or sign up to create a board!</p>
+        <p className=''>Hi! Looks like you aren't logged in! Please sign in or sign up to get stuff done!</p>
         <Link className="sm-btn negative-btn" to='/users/sign-in'>Sign in!</Link>
       </div>
     )
@@ -54,7 +54,8 @@ const BoardList = ({ userInfo }) => {
         <ul className='board-index-container grid-x grid-margin-x'>
           {boardList}
         </ul>
-      </Fragment>)
+      </Fragment>
+    )
   }
 }
 

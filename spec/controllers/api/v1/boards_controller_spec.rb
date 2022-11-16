@@ -20,7 +20,7 @@ RSpec.describe Api::V1::BoardsController, type: :controller do
   end
 
   describe "GET#show" do
-    it "Should return the information about a specific movie" do
+    it "Should return the information about a specific card" do
       get :show, params: {id: board_1}
       returned_json = JSON.parse(response.body)
 
