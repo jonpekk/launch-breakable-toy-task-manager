@@ -14,13 +14,14 @@ RSpec.describe Api::V1::BoardsController, type: :controller do
 
       get :index
       returned_json = JSON.parse(response.body)
+      expect(response.content_type).to eq("application/json")
 
       expect(returned_json.length).to eq(1)
     end
   end
 
   describe "GET#show" do
-    it "Should return the information about a specific movie" do
+    it "Should return the information about a specific card" do
       get :show, params: {id: board_1}
       returned_json = JSON.parse(response.body)
 

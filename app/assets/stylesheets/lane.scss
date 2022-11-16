@@ -7,7 +7,7 @@
     border: 0;
     overflow: hidden;
     max-width: 300px;
-    max-height: 82vh;
+    height: 82vh;
 
     .card-section {
       padding-bottom: 8rem;
@@ -33,12 +33,23 @@
       border-radius: .5rem;
       margin-right: .25rem;
       font-size: .85rem;
+      transition: .2s;
+    }
+
+    .card:hover {
+      opacity: .5;
+      cursor: pointer;
+    }
+
+    .dragging {
+      opacity: 0;
     }
 
     ul {
       list-style-type: none;
       margin: 0;
       padding: 0;
+      border-radius: .5rem;
 
       li {
         background-color: $alabaster;
