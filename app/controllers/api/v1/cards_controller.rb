@@ -13,7 +13,8 @@ class Api::V1::CardsController < ApiController
   
   def update
     card = Card.find(params["card"]["id"])
-    if(card.update(card_params))
+    board = card.board
+    if(verify_access(board) && card.update(card_params))
       render json: card.board
     else 
       render json: {errors: card.errors.full_messages}

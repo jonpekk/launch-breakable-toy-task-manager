@@ -1,12 +1,16 @@
 import React, { useState } from "react";
 import { withRouter } from "react-router-dom";
+import ErrorList from "./ErrorList";
+import _, { isEmpty } from 'lodash'
 
 const ModalContent = (props) => {
 
   const [formFields, setFormFields] = useState({
     name: "",
-    board: props.match.params.id
+    board: props.match.params.id,
+    status: props.activeColumn
   })
+  const [errors, setErrors] = useState({})
 
   const createTask = async (payload) => {
     try {
@@ -34,8 +38,22 @@ const ModalContent = (props) => {
 
   const handleSubmit = (event) => {
     event.preventDefault()
-    createTask(formFields)
-    props.handleClose()
+    if (validateForm(formFields)) {
+      createTask(formFields)
+      props.handleClose()
+    }
+  }
+
+  const validateForm = (fields) => {
+    let submitErrors = {}
+    if (fields.name.trim() === "") {
+      submitErrors = {
+        ...submitErrors,
+        name: "The task title must be between 5 and 50 characters"
+      }
+    }
+    setErrors(submitErrors)
+    return _.isEmpty(submitErrors)
   }
 
   const handleInput = event => {
@@ -51,6 +69,7 @@ const ModalContent = (props) => {
         <h2 className="md-header">Create Task</h2>
         <button className="close-button" onClick={props.handleClose} title="Close Editor">x</button>
       </div>
+      <ErrorList errors={errors} />
       <form className="editor-form" onSubmit={handleSubmit}>
         <label htmlFor="name">Task name</label>
         <input id="name" className="input-field" name="name" type="text" value={formFields.name} placeholder="Task Title Here!" onChange={handleInput} />

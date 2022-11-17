@@ -21,10 +21,23 @@ const Board = (props) => {
     cards: []
   })
 
-  const [modalStatus, setModalStatus] = useState(true)
+  const [modalStatus, setModalStatus] = useState({
+    openStatus: false,
+    activeColumn: null
+  })
+
+  const handleOpen = (column) => {
+    setModalStatus({
+      openStatus: true,
+      activeColumn: columns.indexOf(column)
+    })
+  }
 
   const handleClose = () => {
-    setModalStatus(false)
+    setModalStatus({
+      openStatus: false,
+      activeColumn: null
+    })
   }
 
   const getBoard = async () => {
@@ -66,7 +79,7 @@ const Board = (props) => {
     })
 
     return (
-      <Column name={column} cards={cards} key={column} setBoard={setBoard} />
+      <Column name={column} cards={cards} key={column} setBoard={setBoard} handleOpen={handleOpen} />
     )
   })
 
@@ -81,7 +94,7 @@ const Board = (props) => {
         </ul>
       </DndProvider >
       <ReactModal
-        isOpen={modalStatus}
+        isOpen={modalStatus.openStatus}
         contentLabel={"Create new task"}
         onRequestClose={handleClose}
         shouldCloseOnOverlayClick={true}
@@ -93,6 +106,7 @@ const Board = (props) => {
           handleClose={handleClose}
           board={board}
           setBoard={setBoard}
+          activeColumn={modalStatus.activeColumn}
         />
       </ReactModal>
     </div >
