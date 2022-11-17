@@ -11,6 +11,8 @@ RSpec.describe Api::V1::CardsController, type: :controller do
   describe "PATCH#update" do
     context "User makes a valid request" do
       it "Should return the entire board with the card's udpated status" do
+        sign_in user_1
+        
         patch :update, params: {card: {id: card_1.id, status: "done"}, id:card_1.id}
 
         returned_json = JSON.parse(response.body)
@@ -18,7 +20,26 @@ RSpec.describe Api::V1::CardsController, type: :controller do
 
         expect(returned_json["id"]).to eq(card_1.id)
         expect(returned_json["cards"].last["status"]).to eq("done")
+      end
+    end
+  end
 
+  describe "POST#create" do
+    context "User makes a valid request" do
+      it "Should return the entire board with an additional card" do 
+        sign_in user_1
+
+        post :create, params: {
+          card: {
+          name: "something",
+          },
+          board: board_1.id
+        }
+
+        returned_json = JSON.parse(response.body)
+
+        expect(response.status).to eq(200)
+        expect(returned_json['id']).to eq(board_1.id)
       end
     end
   end

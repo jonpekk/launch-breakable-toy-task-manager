@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDrop } from "react-dnd";
 import Card from './Card';
 
-const Column = ({ name, cards, setBoard }) => {
+const Column = ({ name, cards, setBoard, handleOpen }) => {
   const handleDrop = (name, cardID) => {
     const taskStatus = name.replace('-', '_').toLowerCase()
     const cardPayload = {
@@ -44,6 +44,10 @@ const Column = ({ name, cards, setBoard }) => {
     setColumnCards(cards)
   }
 
+  const openModal = () => {
+    handleOpen(name)
+  }
+
   const [columnCards, setColumnCards] = useState([]);
   const [{ isOver }, drop] = useDrop(() => ({
     accept: "singleCard",
@@ -77,7 +81,7 @@ const Column = ({ name, cards, setBoard }) => {
         <ul className="cell cell-block-y" ref={drop} style={{ background: isOver ? "#4a4b2f" : "inherit" }}>
           {cardList}
         </ul>
-        <a href='/' className="sm-btn primary-btn sticky">Create task</a>
+        <button onClick={openModal} className="sm-btn primary-btn sticky">Create task</button>
       </div>
     </div >
   )

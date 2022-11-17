@@ -3,7 +3,10 @@ import { withRouter, Link, Redirect } from "react-router-dom";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import _ from 'lodash'
+import ReactModal from "react-modal";
+import Modal from "react-modal";
 import Column from "./Column";
+import ModalContent from "./ModalContent";
 
 const Board = (props) => {
 
@@ -11,10 +14,31 @@ const Board = (props) => {
     return <Redirect to='/' />
   }
 
+  Modal.setAppElement('#app');
+
   const [board, setBoard] = useState({
     user: {},
     cards: []
   })
+
+  const [modalStatus, setModalStatus] = useState({
+    openStatus: false,
+    activeColumn: null
+  })
+
+  const handleOpen = (column) => {
+    setModalStatus({
+      openStatus: true,
+      activeColumn: columns.indexOf(column)
+    })
+  }
+
+  const handleClose = () => {
+    setModalStatus({
+      openStatus: false,
+      activeColumn: null
+    })
+  }
 
   const getBoard = async () => {
     try {
@@ -55,19 +79,37 @@ const Board = (props) => {
     })
 
     return (
-      <Column name={column} cards={cards} key={column} setBoard={setBoard} />
+      <Column name={column} cards={cards} key={column} setBoard={setBoard} handleOpen={handleOpen} />
     )
   })
 
   return (
-    <DndProvider backend={HTML5Backend}>
-      <section className="top-body-section">
-        <h2 className="sm-header">{board.name}</h2>
-      </section>
-      <ul className="board-container grid-margin-x grid-x cell-block grid-frame">
-        {columnList}
-      </ul>
-    </DndProvider>
+    <div>
+      < DndProvider backend={HTML5Backend} >
+        <section className="top-body-section">
+          <h2 className="sm-header">{board.name}</h2>
+        </section>
+        <ul className="board-container grid-margin-x grid-x cell-block grid-frame">
+          {columnList}
+        </ul>
+      </DndProvider >
+      <ReactModal
+        isOpen={modalStatus.openStatus}
+        contentLabel={"Create new task"}
+        onRequestClose={handleClose}
+        shouldCloseOnOverlayClick={true}
+        shouldCloseOnEsc={true}
+        overlayClassName="editor-section grid-x overlay-styles"
+        className="editor-container large-6 medium-8 small-12 large-offset-3 medium-offset-2"
+      >
+        <ModalContent
+          handleClose={handleClose}
+          board={board}
+          setBoard={setBoard}
+          activeColumn={modalStatus.activeColumn}
+        />
+      </ReactModal>
+    </div >
   )
 }
 
