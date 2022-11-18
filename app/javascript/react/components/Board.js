@@ -107,6 +107,7 @@ const Board = (props) => {
           board={board}
           setBoard={setBoard}
           activeColumn={modalStatus.activeColumn}
+          activeCard={modalStatus.activeCard}
           actionStatus={modalStatus.actionStatus}
           columns={columns}
         />

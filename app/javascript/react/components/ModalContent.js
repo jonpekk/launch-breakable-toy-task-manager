@@ -7,7 +7,7 @@ import ModalDetails from "./ModalDetails";
 const ModalContent = (props) => {
 
   const renderOptions = {
-    view: <ModalDetails bs={props.bd} />,
+    view: <ModalDetails cardID={props.activeCard} />,
     create: <ModalForm board={props.board} activeColumn={props.activeColumn} columns={props.columns} handleClose={props.handleClose} setBoard={props.setBoard} />,
   }
 

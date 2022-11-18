@@ -1,0 +1,27 @@
+@import './colors.scss';
+
+.card-detail-container {
+  p {
+    color: $alabaster
+  }
+}
+
+.description-container {
+  background-color: $dark-grey;
+  margin-top: 2rem;
+  padding: .5rem 2rem;
+  border-radius: 1rem;
+  min-height: 15rem;
+
+  p {
+    color: $alabaster;
+  }
+}
+
+.attachment-section {
+  margin-top: 3rem;
+}
+
+.detail-image {
+  margin-top: 2rem;
+}
