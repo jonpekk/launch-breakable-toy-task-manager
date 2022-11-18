@@ -23,20 +23,19 @@ const Board = (props) => {
 
   const [modalStatus, setModalStatus] = useState({
     openStatus: false,
-    activeColumn: null
+    activeColumn: null,
+    activeCard: null
   })
 
-  const handleOpen = (column) => {
-    setModalStatus({
-      openStatus: true,
-      activeColumn: columns.indexOf(column)
-    })
+  const handleOpen = (statusObj) => {
+    setModalStatus(statusObj)
   }
 
   const handleClose = () => {
     setModalStatus({
       openStatus: false,
-      activeColumn: null
+      activeColumn: null,
+      activeCard: null
     })
   }
 
@@ -79,7 +78,7 @@ const Board = (props) => {
     })
 
     return (
-      <Column name={column} cards={cards} key={column} setBoard={setBoard} handleOpen={handleOpen} />
+      <Column name={column} cards={cards} key={column} setBoard={setBoard} handleOpen={handleOpen} modalStatus={modalStatus} />
     )
   })
 
@@ -107,6 +106,7 @@ const Board = (props) => {
           board={board}
           setBoard={setBoard}
           activeColumn={modalStatus.activeColumn}
+          columns={columns}
         />
       </ReactModal>
     </div >

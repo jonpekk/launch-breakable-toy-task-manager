@@ -1,4 +1,5 @@
 class Card < ApplicationRecord
+  mount_uploader :card_attachment, CardAttachmentUploader
   belongs_to :board
   validates :name, :board, presence: true
   validates :name, length: {within: 5..50}

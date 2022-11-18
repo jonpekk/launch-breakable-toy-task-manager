@@ -1,9 +1,11 @@
 class Api::V1::CardsController < ApiController
-  
+
+  skip_before_action :verify_authenticity_token
+
   def create
-    card = Card.new(card_params)
-    board = Board.find(params["board"])
-    card.board = Board.find(params["board"])
+    card = Card.new(create_card_params)
+    board = Board.find(params["board_id"])
+    card.board = board
     if(verify_access(board) && card.save)
       render json: card.board
     else 
@@ -25,6 +27,10 @@ class Api::V1::CardsController < ApiController
 
   def card_params
     params.require(:card).permit(:id, :name, :status)
+  end
+
+  def create_card_params
+    params.permit(:id, :name, :status, :description, :card_attachment)
   end
 
   def verify_access(board)
