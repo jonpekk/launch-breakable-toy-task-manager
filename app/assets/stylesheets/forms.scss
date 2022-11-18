@@ -14,10 +14,14 @@
     margin: 0rem;
   }
 
-
   h2 {
     color: $alabaster;
     line-height: 3rem;
+  }
+
+  textarea {
+    color: $smoky-black;
+    border-radius: 1rem;
   }
 }
 
@@ -38,9 +42,16 @@
   }
 }
 
-
 .editor-form {
   margin-top: 2rem;
+
+  * {
+    color: $alabaster;
+  }
+
+  select {
+    color: $smoky-black;
+  }
 
   label {
     color: $alabaster;
@@ -52,13 +63,29 @@
   }
 }
 
+.drop-zone {
+  width: 50%;
+  padding: 1rem;
+  margin: 1rem 0;
+  border: 2px dashed $alabaster;
+  border-radius: 1rem;
+  transition: .2s;
+}
+
+.drop-zone:hover {
+  cursor: pointer;
+  color: $yellow-green-crayola;
+  border-color: $yellow-green-crayola
+}
+
 .overlay-styles {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(255, 255, 255, 0.75)
+  background-color: rgba(255, 255, 255, 0.75);
+  overflow: scroll;
 }
 
 .editor-form-actions {

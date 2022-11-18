@@ -25,11 +25,9 @@ gem 'jbuilder', '~> 2.5'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
-gem "active_model_serializers"
-
 
 group :development, :test do
-
+  gem "dotenv-rails"
 end
 
 group :development do
@@ -55,3 +53,8 @@ gem 'shoulda-matchers', group: [:development, :test], require: false
 gem 'devise'
 gem 'foundation-rails', '~> 6.5'
 gem 'webpacker', '~> 3.3'
+gem "active_model_serializers"
+gem "carrierwave"
+gem "fog-aws"
+gem "figaro"
+gem "carrierwave-aws"
