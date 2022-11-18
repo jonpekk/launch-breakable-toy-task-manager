@@ -2,6 +2,10 @@ class Api::V1::CardsController < ApiController
 
   skip_before_action :verify_authenticity_token
 
+  def show
+    binding.pry
+  end
+
   def create
     card = Card.new(create_card_params)
     board = Board.find(params["board_id"])
