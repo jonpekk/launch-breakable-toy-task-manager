@@ -1,11 +1,33 @@
 import React, { useEffect, useState } from 'react'
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import Modal from "react-modal";
 import BoardList from './BoardList';
 import Board from './Board';
 import SignIn from './SignIn';
 
 export const App = (props) => {
+
+  Modal.setAppElement('#app');
+
   const [userInfo, setUserInfo] = useState(undefined)
+  const [modalStatus, setModalStatus] = useState({
+    openStatus: false,
+    activeColumn: null,
+    activeCard: null,
+    actionStatus: null
+  })
+
+  const handleOpen = (statusObj) => {
+    setModalStatus(statusObj)
+  }
+
+  const handleClose = () => {
+    setModalStatus({
+      openStatus: false,
+      activeColumn: null,
+      activeCard: null
+    })
+  }
 
   const getUser = async () => {
     try {
@@ -36,13 +58,27 @@ export const App = (props) => {
     <BrowserRouter>
       <Switch>
         <Route exact path="/">
-          <BoardList userInfo={userInfo} />
+          <BoardList
+            userInfo={userInfo}
+            modalStatus={modalStatus}
+            setModalStatus={setModalStatus}
+            handleClose={handleClose}
+            handleOpen={handleOpen}
+          />
         </Route>
         <Route exact path="/boards/:id">
-          <Board userInfo={userInfo} />
+          <Board
+            userInfo={userInfo}
+            modalStatus={modalStatus}
+            setModalStatus={setModalStatus}
+            handleClose={handleClose}
+            handleOpen={handleOpen}
+          />
         </Route>
         <Route exact path="/users/sign-in">
-          <SignIn userInfo={userInfo} />
+          <SignIn
+            userInfo={userInfo}
+          />
         </Route>
 
       </Switch>

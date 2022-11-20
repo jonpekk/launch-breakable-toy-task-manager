@@ -1,10 +1,13 @@
 import React, { Fragment, useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
+import ReactModal from "react-modal";
+import ModalContent from "./ModalContent";
 import BoardTile from './BoardTile';
 
-const BoardList = ({ userInfo }) => {
+const BoardList = ({ userInfo, modalStatus, handleClose, handleOpen }) => {
 
   const [boards, setBoards] = useState([])
+  const [newBoardRedirect, setNewBoardRedirect] = useState(null)
 
   const getBoards = async () => {
     try {
@@ -48,12 +51,44 @@ const BoardList = ({ userInfo }) => {
       )
     })
 
+    const handleClick = () => {
+      handleOpen({
+        ...modalStatus,
+        openStatus: true,
+        actionStatus: "newBoard"
+      })
+    }
+
+    if (newBoardRedirect) {
+      handleClose()
+      return <Redirect to={`/boards/${newBoardRedirect}`} />
+    }
+
     return (
       <Fragment>
         <h2>Welcome!</h2>
-        <ul className='board-index-container grid-x grid-margin-x'>
-          {boardList}
-        </ul>
+        <div className="board-index-container">
+          <button className="sm-btn" onClick={handleClick}>Create Board</button>
+          <ul className="grid-x grid-margin-x">
+            {boardList}
+          </ul>
+        </div>
+
+        <ReactModal
+          isOpen={modalStatus.openStatus}
+          contentLabel={"Create new task"}
+          onRequestClose={handleClose}
+          shouldCloseOnOverlayClick={true}
+          shouldCloseOnEsc={true}
+          overlayClassName="editor-section grid-x overlay-styles"
+          className="editor-container large-6 medium-8 small-12 large-offset-3 medium-offset-2"
+        >
+          <ModalContent
+            handleClose={handleClose}
+            actionStatus={modalStatus.actionStatus}
+            setNewBoardRedirect={setNewBoardRedirect}
+          />
+        </ReactModal>
       </Fragment>
     )
   }

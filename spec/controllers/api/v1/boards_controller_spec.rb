@@ -29,4 +29,22 @@ RSpec.describe Api::V1::BoardsController, type: :controller do
       expect(returned_json['user']['id']).to eq(board_1.user.id)
     end
   end
+
+  describe "POST#create" do
+    it "Should return a new board" do
+      sign_in user_1
+      get :create, params: {
+        board: {
+          name: "spec test", 
+          shortcode: "SPEC",
+          description: "Quick description"
+        }
+      }
+
+      returned_json = JSON.parse(response.body)
+
+      expect(response.status).to eq(200)
+      expect(returned_json["name"]).to eq("spec test")
+    end
+  end
 end
