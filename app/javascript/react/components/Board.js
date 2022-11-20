@@ -4,7 +4,6 @@ import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import _ from 'lodash'
 import ReactModal from "react-modal";
-import Modal from "react-modal";
 import Column from "./Column";
 import ModalContent from "./ModalContent";
 
@@ -14,31 +13,10 @@ const Board = (props) => {
     return <Redirect to='/' />
   }
 
-  Modal.setAppElement('#app');
-
   const [board, setBoard] = useState({
     user: {},
     cards: []
   })
-
-  const [modalStatus, setModalStatus] = useState({
-    openStatus: false,
-    activeColumn: null,
-    activeCard: null,
-    actionStatus: null
-  })
-
-  const handleOpen = (statusObj) => {
-    setModalStatus(statusObj)
-  }
-
-  const handleClose = () => {
-    setModalStatus({
-      openStatus: false,
-      activeColumn: null,
-      activeCard: null
-    })
-  }
 
   const getBoard = async () => {
     try {
@@ -79,7 +57,7 @@ const Board = (props) => {
     })
 
     return (
-      <Column name={column} cards={cards} key={column} setBoard={setBoard} handleOpen={handleOpen} modalStatus={modalStatus} />
+      <Column name={column} cards={cards} key={column} setBoard={setBoard} handleOpen={props.handleOpen} modalStatus={props.modalStatus} />
     )
   })
 
@@ -94,21 +72,21 @@ const Board = (props) => {
         </ul>
       </DndProvider >
       <ReactModal
-        isOpen={modalStatus.openStatus}
+        isOpen={props.modalStatus.openStatus}
         contentLabel={"Create new task"}
-        onRequestClose={handleClose}
+        onRequestClose={props.handleClose}
         shouldCloseOnOverlayClick={true}
         shouldCloseOnEsc={true}
         overlayClassName="editor-section grid-x overlay-styles"
         className="editor-container large-6 medium-8 small-12 large-offset-3 medium-offset-2"
       >
         <ModalContent
-          handleClose={handleClose}
+          handleClose={props.handleClose}
           board={board}
           setBoard={setBoard}
-          activeColumn={modalStatus.activeColumn}
-          activeCard={modalStatus.activeCard}
-          actionStatus={modalStatus.actionStatus}
+          activeColumn={props.modalStatus.activeColumn}
+          activeCard={props.modalStatus.activeCard}
+          actionStatus={props.modalStatus.actionStatus}
           columns={columns}
         />
       </ReactModal>

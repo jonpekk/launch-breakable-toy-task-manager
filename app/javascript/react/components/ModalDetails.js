@@ -32,14 +32,14 @@ const ModalDetails = props => {
 
   return (
     <div className="card-detail-container">
-      <h3>{task.name}</h3>
-      <h4>Description</h4>
+      <h2>{task.name}</h2>
+      <h3>Description</h3>
       <div className="description-container">
         <p>{task.description}</p>
       </div>
       <p className="eyebrow">Status: {task.status.replace('_', '-').toUpperCase()}</p>
       <div className="attachment-section">
-        <h4>Attachment</h4>
+        <h3>Attachment</h3>
         <img className="detail-image" src={task.card_attachment.url} />
       </div>
     </div>
