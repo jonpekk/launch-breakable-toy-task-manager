@@ -45,11 +45,22 @@ const Column = (props) => {
     setColumnCards(props.cards)
   }
 
-  const openModal = () => {
+  const openEditorModal = () => {
     props.handleOpen({
       ...props.modalStatus,
       openStatus: true,
-      activeColumn: props.name
+      activeColumn: props.name,
+      actionStatus: "create"
+    })
+  }
+
+  const openDetailModal = (cardID) => {
+    props.handleOpen({
+      ...props.modalStatus,
+      openStatus: true,
+      activeColumn: props.name,
+      actionStatus: "view",
+      activeCard: cardID
     })
   }
 
@@ -69,6 +80,7 @@ const Column = (props) => {
         id={card.id}
         name={card.name}
         status={card.status}
+        openDetailModal={openDetailModal}
       />
     )
   })
@@ -86,7 +98,7 @@ const Column = (props) => {
         <ul className="cell cell-block-y" ref={drop} style={{ background: isOver ? "#4a4b2f" : "inherit" }}>
           {cardList}
         </ul>
-        <button onClick={openModal} className="sm-btn primary-btn sticky">Create task</button>
+        <button onClick={openEditorModal} className="sm-btn primary-btn sticky">Create task</button>
       </div>
     </div >
   )

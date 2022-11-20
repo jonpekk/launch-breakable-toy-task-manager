@@ -2,6 +2,15 @@ class Api::V1::CardsController < ApiController
 
   skip_before_action :verify_authenticity_token
 
+  def show
+    card = Card.find(params["id"])
+    board = Board.find(params["board_id"])
+
+    if(verify_access(board))
+      render json: card
+    end
+  end
+
   def create
     card = Card.new(create_card_params)
     board = Board.find(params["board_id"])

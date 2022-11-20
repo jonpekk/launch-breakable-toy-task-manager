@@ -24,7 +24,8 @@ const Board = (props) => {
   const [modalStatus, setModalStatus] = useState({
     openStatus: false,
     activeColumn: null,
-    activeCard: null
+    activeCard: null,
+    actionStatus: null
   })
 
   const handleOpen = (statusObj) => {
@@ -106,6 +107,8 @@ const Board = (props) => {
           board={board}
           setBoard={setBoard}
           activeColumn={modalStatus.activeColumn}
+          activeCard={modalStatus.activeCard}
+          actionStatus={modalStatus.actionStatus}
           columns={columns}
         />
       </ReactModal>

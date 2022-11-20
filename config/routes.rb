@@ -9,7 +9,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       get'/current-user', to: "current_user#index"
       resources :boards, only: [:index, :show] do
-        resources :cards, only: [:create, :update]
+        resources :cards, only: [:show, :create, :update]
       end
     end
   end
