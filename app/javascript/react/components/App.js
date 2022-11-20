@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import { DndProvider } from "react-dnd";
+import { HTML5Backend } from "react-dnd-html5-backend";
 import Modal from "react-modal";
 import BoardList from './BoardList';
 import Board from './Board';
@@ -55,34 +57,36 @@ export const App = (props) => {
   }, [])
 
   return (
-    <BrowserRouter>
-      <Switch>
-        <Route exact path="/">
-          <BoardList
-            userInfo={userInfo}
-            modalStatus={modalStatus}
-            setModalStatus={setModalStatus}
-            handleClose={handleClose}
-            handleOpen={handleOpen}
-          />
-        </Route>
-        <Route exact path="/boards/:id">
-          <Board
-            userInfo={userInfo}
-            modalStatus={modalStatus}
-            setModalStatus={setModalStatus}
-            handleClose={handleClose}
-            handleOpen={handleOpen}
-          />
-        </Route>
-        <Route exact path="/users/sign-in">
-          <SignIn
-            userInfo={userInfo}
-          />
-        </Route>
+    < DndProvider backend={HTML5Backend} >
+      <BrowserRouter>
+        <Switch>
+          <Route exact path="/">
+            <BoardList
+              userInfo={userInfo}
+              modalStatus={modalStatus}
+              setModalStatus={setModalStatus}
+              handleClose={handleClose}
+              handleOpen={handleOpen}
+            />
+          </Route>
+          <Route exact path="/boards/:id">
+            <Board
+              userInfo={userInfo}
+              modalStatus={modalStatus}
+              setModalStatus={setModalStatus}
+              handleClose={handleClose}
+              handleOpen={handleOpen}
+            />
+          </Route>
+          <Route exact path="/users/sign-in">
+            <SignIn
+              userInfo={userInfo}
+            />
+          </Route>
+        </Switch>
+      </BrowserRouter>
+    </DndProvider >
 
-      </Switch>
-    </BrowserRouter>
   )
 }
 

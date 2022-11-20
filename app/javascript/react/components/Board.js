@@ -1,7 +1,5 @@
 import React, { Fragment, useEffect, useState } from "react"
 import { withRouter, Link, Redirect } from "react-router-dom";
-import { DndProvider } from "react-dnd";
-import { HTML5Backend } from "react-dnd-html5-backend";
 import _ from 'lodash'
 import ReactModal from "react-modal";
 import Column from "./Column";
@@ -63,14 +61,12 @@ const Board = (props) => {
 
   return (
     <div>
-      < DndProvider backend={HTML5Backend} >
-        <section className="top-body-section">
-          <h2 className="sm-header">{board.name}</h2>
-        </section>
-        <ul className="board-container grid-margin-x grid-x cell-block grid-frame">
-          {columnList}
-        </ul>
-      </DndProvider >
+      <section className="top-body-section">
+        <h2 className="sm-header">{board.name}</h2>
+      </section>
+      <ul className="board-container grid-margin-x grid-x cell-block grid-frame">
+        {columnList}
+      </ul>
       <ReactModal
         isOpen={props.modalStatus.openStatus}
         contentLabel={"Create new task"}
