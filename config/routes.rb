@@ -3,6 +3,7 @@ Rails.application.routes.draw do
 
   get '/boards', to: 'static_pages#index'
   get '/boards/:id', to: 'static_pages#index'
+  get '/users/:id', to: 'static_pages#index'
   devise_for :users
 
   namespace :api do
@@ -11,6 +12,7 @@ Rails.application.routes.draw do
       resources :boards, only: [:index, :show, :create, :destroy] do
         resources :cards, only: [:show, :create, :update]
       end
+      resources :users, only: [:show]
     end
   end
 end
