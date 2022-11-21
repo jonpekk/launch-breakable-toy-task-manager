@@ -6,6 +6,7 @@ import Modal from "react-modal";
 import BoardList from './BoardList';
 import Board from './Board';
 import SignIn from './SignIn';
+import Profile from './Profile';
 
 export const App = (props) => {
 
@@ -88,6 +89,9 @@ export const App = (props) => {
             <SignIn
               userInfo={userInfo}
             />
+          </Route>
+          <Route exact path="/users/:id">
+            <Profile userInfo={userInfo} />
           </Route>
         </Switch>
       </BrowserRouter>
