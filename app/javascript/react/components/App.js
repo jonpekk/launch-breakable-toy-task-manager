@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import Modal from "react-modal";
@@ -12,12 +12,14 @@ export const App = (props) => {
   Modal.setAppElement('#app');
 
   const [userInfo, setUserInfo] = useState(undefined)
+  const [boards, setBoards] = useState([])
   const [modalStatus, setModalStatus] = useState({
     openStatus: false,
     activeColumn: null,
     activeCard: null,
     actionStatus: null
   })
+
 
   const handleOpen = (statusObj) => {
     setModalStatus(statusObj)
@@ -67,6 +69,8 @@ export const App = (props) => {
               setModalStatus={setModalStatus}
               handleClose={handleClose}
               handleOpen={handleOpen}
+              boards={boards}
+              setBoards={setBoards}
             />
           </Route>
           <Route exact path="/boards/:id">
@@ -76,6 +80,8 @@ export const App = (props) => {
               setModalStatus={setModalStatus}
               handleClose={handleClose}
               handleOpen={handleOpen}
+              boards={boards}
+              setBoards={setBoards}
             />
           </Route>
           <Route exact path="/users/sign-in">

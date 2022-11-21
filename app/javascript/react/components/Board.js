@@ -16,6 +16,16 @@ const Board = (props) => {
     cards: []
   })
 
+  const [redirect, setRedirect] = useState(false)
+
+  const handleDeleteModal = () => {
+    props.handleOpen({
+      ...props.modalStatus,
+      openStatus: true,
+      actionStatus: "delete"
+    })
+  }
+
   const getBoard = async () => {
     try {
       const response = await fetch(`/api/v1/boards/${props.match.params.id}`)
@@ -40,7 +50,7 @@ const Board = (props) => {
   if (props.userInfo !== undefined && board.user.id !== props.userInfo.id) {
     return (
       <div className="error-message alone">
-        <p className=''>Woops! You don't have access to that board! Please sign in to the correct account or to to the homepage to see what boards you have access to</p>
+        <p>Woops! You don't have access to that board! Please sign in to the correct account or to to the homepage to see what boards you have access to</p>
         <Link className="sm-btn negative-btn" to='/'>Take me home!</Link>
       </div>
     )
@@ -59,10 +69,15 @@ const Board = (props) => {
     )
   })
 
+  if (redirect) {
+    return <Redirect to="/" />
+  }
+
   return (
     <div>
       <section className="top-body-section">
-        <h2 className="sm-header">{board.name}</h2>
+        <h2 className="sm-header positive">{board.name}</h2>
+        <button className="sm-btn danger-zone" onClick={handleDeleteModal}>DELETE BOARD</button>
       </section>
       <ul className="board-container grid-margin-x grid-x cell-block grid-frame">
         {columnList}
@@ -80,10 +95,12 @@ const Board = (props) => {
           handleClose={props.handleClose}
           board={board}
           setBoard={setBoard}
+          setBoards={props.setBoards}
           activeColumn={props.modalStatus.activeColumn}
           activeCard={props.modalStatus.activeCard}
           actionStatus={props.modalStatus.actionStatus}
           columns={columns}
+          setRedirect={setRedirect}
         />
       </ReactModal>
     </div >

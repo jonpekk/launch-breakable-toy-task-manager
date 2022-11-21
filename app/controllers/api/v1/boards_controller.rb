@@ -1,4 +1,7 @@
-class Api::V1::BoardsController < ApiController 
+class Api::V1::BoardsController < ApiController
+
+  skip_before_action :verify_authenticity_token
+
   def index
     if current_user 
       render json: current_user.boards
@@ -6,7 +9,9 @@ class Api::V1::BoardsController < ApiController
       render json: "user invalid"
     end
   end
+
   def show
+  
     render json: Board.find(params['id'])
   end
 
@@ -20,9 +25,23 @@ class Api::V1::BoardsController < ApiController
     end
   end
 
+  def destroy
+    board = Board.find(params["id"])
+    if(verify_access(board))
+      board.destroy
+      render json: Board.all
+    else
+      render status: 401
+    end
+  end
+
   private
 
   def board_params
     params.require(:board).permit(:name, :shortcode, :description)
+  end
+
+  def verify_access(board)
+    board.user == current_user
   end
 end

@@ -48,8 +48,12 @@ ol {
 }
 
 .top-body-section {
+  margin-bottom: .5rem;
+  display: flex;
+
   h2 {
     font-family: $ubuntu;
+    margin-right: 2rem
   }
 }
 

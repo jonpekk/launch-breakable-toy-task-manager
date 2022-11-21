@@ -87,7 +87,7 @@ const ModalForm = (props) => {
   return (
     <Fragment>
       <ErrorList errors={errors} />
-      <h2>New Task Form</h2>
+      <h2 className="sm-header positive">New Task Form</h2>
       <form className="editor-form" onSubmit={handleSubmit}>
         <div className="grid-x">
           <div className="input-container large-7 medium-12 small-12">
