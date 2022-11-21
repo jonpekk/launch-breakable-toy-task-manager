@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 const Card = ({ name, id, openDetailModal }) => {
   const [{ isDragging }, drag] = useDrag(() => ({
     type: "singleCard",
-    item: { id: id },
+    item: () => ({ id }),
     collect: (monitor) => ({
       isDragging: monitor.isDragging(),
       didDrop: monitor.didDrop(),
