@@ -4,9 +4,8 @@ import ReactModal from "react-modal";
 import ModalContent from "./ModalContent";
 import BoardTile from './BoardTile';
 
-const BoardList = ({ userInfo, modalStatus, handleClose, handleOpen }) => {
+const BoardList = ({ userInfo, modalStatus, handleClose, handleOpen, boards, setBoards }) => {
 
-  const [boards, setBoards] = useState([])
   const [newBoardRedirect, setNewBoardRedirect] = useState(null)
 
   const getBoards = async () => {
@@ -66,7 +65,7 @@ const BoardList = ({ userInfo, modalStatus, handleClose, handleOpen }) => {
 
     return (
       <Fragment>
-        <h2>Welcome!</h2>
+        <h2 className="sm-header positive">Welcome!</h2>
         <div className="board-index-container">
           <button className="sm-btn" onClick={handleClick}>Create Board</button>
           <ul className="grid-x grid-margin-x">

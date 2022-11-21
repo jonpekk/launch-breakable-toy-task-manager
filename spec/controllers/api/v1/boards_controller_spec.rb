@@ -33,7 +33,7 @@ RSpec.describe Api::V1::BoardsController, type: :controller do
   describe "POST#create" do
     it "Should return a new board" do
       sign_in user_1
-      get :create, params: {
+      post :create, params: {
         board: {
           name: "spec test", 
           shortcode: "SPEC",
@@ -45,6 +45,22 @@ RSpec.describe Api::V1::BoardsController, type: :controller do
 
       expect(response.status).to eq(200)
       expect(returned_json["name"]).to eq("spec test")
+    end
+  end
+
+  describe "DELETE#destroy" do 
+    it "Should remove the board" do
+      sign_in user_1
+      board_length = Board.all.length
+
+      delete :destroy, params: {
+        id: Board.last
+      }
+      
+      returned_json = JSON.parse(response.body)
+      
+      expect(response.status).to eq(200)
+      expect(Board.all.length).to eq(board_length - 1)
     end
   end
 end

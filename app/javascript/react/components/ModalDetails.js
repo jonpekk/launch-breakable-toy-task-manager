@@ -32,7 +32,7 @@ const ModalDetails = props => {
 
   return (
     <div className="card-detail-container">
-      <h2>{task.name}</h2>
+      <h2 className="sm-header positive">{task.name}</h2>
       <h3>Description</h3>
       <div className="description-container">
         <p>{task.description}</p>
