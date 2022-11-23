@@ -1,32 +1,23 @@
 import React, { Fragment, useEffect, useState } from "react";
 import { Link, Redirect } from "react-router-dom";
 import ReactModal from "react-modal";
-import ModalContent from "./ModalContent";
+import ModalContent from "../../../components/ModalContent";
 import BoardTile from './BoardTile';
+import { useSelector, useDispatch } from "react-redux";
+import {
+  userBoards,
+  setBoardsThunk
+} from './boardsSlice'
 
-const BoardList = ({ userInfo, modalStatus, handleClose, handleOpen, boards, setBoards }) => {
+const BoardList = ({ userInfo, modalStatus, handleClose, handleOpen }) => {
+
+  const boards = useSelector(userBoards)
+  const dispatch = useDispatch()
 
   const [newBoardRedirect, setNewBoardRedirect] = useState(null)
 
-  const getBoards = async () => {
-    try {
-      const response = await fetch('/api/v1/boards')
-      if (!response.ok) {
-        const errorMessage = `${response.status} - ${response.statusText}`
-        const error = new Error(errorMessage)
-        throw (error)
-      } else {
-        const responseBody = await response.json()
-        setBoards(responseBody)
-      }
-
-    } catch (err) {
-      console.log(`Error! ${err}`)
-    }
-  }
-
   useEffect(() => {
-    getBoards()
+    dispatch(setBoardsThunk())
   }, [])
 
   if (userInfo === null) {

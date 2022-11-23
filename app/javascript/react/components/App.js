@@ -3,17 +3,24 @@ import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import Modal from "react-modal";
-import BoardList from './BoardList';
+import { useSelector, useDispatch } from "react-redux";
+import {
+  currentProfile,
+  setUserThunk
+} from '../src/features/current-user/userSlice';
+import BoardList from '../src/features/board-list/BoardList';
 import Board from './Board';
 import SignIn from './SignIn';
-import Profile from './Profile';
+import Profile from '../src/features/current-user/Profile';
 
 export const App = (props) => {
 
+  const profile = useSelector(currentProfile)
+  const dispatch = useDispatch()
+
+
   Modal.setAppElement('#app');
 
-  const [userInfo, setUserInfo] = useState(undefined)
-  const [boards, setBoards] = useState([])
   const [modalStatus, setModalStatus] = useState({
     openStatus: false,
     activeColumn: null,
@@ -34,29 +41,9 @@ export const App = (props) => {
     })
   }
 
-  const getUser = async () => {
-    try {
-      const response = await fetch('/api/v1/current-user')
-      if (!response.ok) {
-        const errorMessage = `${response.status} - ${response.statusText}`
-        const error = new Error(errorMessage)
-        throw (error)
-      } else {
-        const responseBody = await response.json()
-        if (responseBody) {
-          setUserInfo(responseBody)
-        } else {
-          setUserInfo(null)
-        }
-      }
-
-    } catch (err) {
-      console.log(`Error! ${err}`)
-    }
-  }
 
   useEffect(() => {
-    getUser()
+    dispatch(setUserThunk())
   }, [])
 
   return (
@@ -65,38 +52,33 @@ export const App = (props) => {
         <Switch>
           <Route exact path="/">
             <BoardList
-              userInfo={userInfo}
+              userInfo={profile}
               modalStatus={modalStatus}
               setModalStatus={setModalStatus}
               handleClose={handleClose}
               handleOpen={handleOpen}
-              boards={boards}
-              setBoards={setBoards}
             />
           </Route>
           <Route exact path="/boards/:id">
             <Board
-              userInfo={userInfo}
+              userInfo={profile}
               modalStatus={modalStatus}
               setModalStatus={setModalStatus}
               handleClose={handleClose}
               handleOpen={handleOpen}
-              boards={boards}
-              setBoards={setBoards}
             />
           </Route>
           <Route exact path="/users/sign-in">
             <SignIn
-              userInfo={userInfo}
+              userInfo={profile}
             />
           </Route>
           <Route exact path="/users/:id">
-            <Profile userInfo={userInfo} />
+            <Profile userInfo={profile} />
           </Route>
         </Switch>
       </BrowserRouter>
     </DndProvider >
-
   )
 }
 
