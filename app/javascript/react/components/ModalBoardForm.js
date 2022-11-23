@@ -16,7 +16,7 @@ const ModalBoardForm = (props) => {
     if (fields.name.trim() === "" || fields.name.trim().length > 50 || fields.name.trim().length < 5) {
       submitErrors = {
         ...submitErrors,
-        name: "The task title must be between 5 and 50 characters"
+        name: "The project name must be between 5 and 50 characters"
       }
     }
 

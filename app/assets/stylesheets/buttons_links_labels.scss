@@ -20,6 +20,7 @@ a {
 .sm-btn:hover,
 .sm-btn:focus {
   background-color: $smoky-black;
+  border: 1px solid $alabaster;
   color: $alabaster;
   cursor: pointer;
 }
@@ -32,7 +33,7 @@ a {
 .negative-link:hover,
 .negative-link:focus {
   color: $alabaster;
-  border-bottom: 2px solid $alabaster;
+  border-bottom: 1px solid $alabaster;
   cursor: pointer;
 }
 
@@ -55,6 +56,6 @@ a {
 
 .danger-zone {
   background-color: #BB3F3F;
-  color: $smoky-black;
-
+  border: 1px solid #BB3F3F;
+  color: $alabaster;
 }
