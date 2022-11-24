@@ -3,18 +3,21 @@ import { withRouter, Link, Redirect } from "react-router-dom";
 import _ from 'lodash'
 import ReactModal from "react-modal";
 import Column from "./Column";
-import ModalContent from "./ModalContent";
+import ModalContent from "../../../components/ModalContent";
+import { useSelector, useDispatch } from "react-redux";
+import {
+  setBoardThunk,
+  showBoard
+} from './boardSlice'
 
 const Board = (props) => {
+
+  const board = useSelector(showBoard)
+  const dispatch = useDispatch()
 
   if (props.userInfo === null) {
     return <Redirect to='/' />
   }
-
-  const [board, setBoard] = useState({
-    user: {},
-    cards: []
-  })
 
   const [redirect, setRedirect] = useState(false)
 
@@ -26,25 +29,8 @@ const Board = (props) => {
     })
   }
 
-  const getBoard = async () => {
-    try {
-      const response = await fetch(`/api/v1/boards/${props.match.params.id}`)
-      if (!response.ok) {
-        const errorMessage = `${response.status} - ${response.statusText}`
-        const error = new Error(errorMessage)
-        throw (error)
-      } else {
-        const responseBody = await response.json()
-        setBoard(responseBody)
-      }
-
-    } catch (err) {
-      console.log(`Error! ${err}`)
-    }
-  }
-
   useEffect(() => {
-    getBoard()
+    dispatch(setBoardThunk(props.match.params.id))
   }, [])
 
   if (props.userInfo !== undefined && board.user.id !== props.userInfo.id) {
@@ -65,7 +51,7 @@ const Board = (props) => {
     })
 
     return (
-      <Column name={column} cards={cards} key={column} setBoard={setBoard} handleOpen={props.handleOpen} modalStatus={props.modalStatus} />
+      <Column name={column} cards={cards} key={column} handleOpen={props.handleOpen} modalStatus={props.modalStatus} />
     )
   })
 
@@ -93,9 +79,6 @@ const Board = (props) => {
       >
         <ModalContent
           handleClose={props.handleClose}
-          board={board}
-          setBoard={setBoard}
-          setBoards={props.setBoards}
           activeColumn={props.modalStatus.activeColumn}
           activeCard={props.modalStatus.activeCard}
           actionStatus={props.modalStatus.actionStatus}

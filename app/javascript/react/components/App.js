@@ -9,7 +9,7 @@ import {
   setUserThunk
 } from '../src/features/current-user/userSlice';
 import BoardList from '../src/features/board-list/BoardList';
-import Board from './Board';
+import Board from '../src/features/board-show/Board';
 import SignIn from './SignIn';
 import Profile from '../src/features/current-user/Profile';
 
@@ -17,7 +17,6 @@ export const App = (props) => {
 
   const profile = useSelector(currentProfile)
   const dispatch = useDispatch()
-
 
   Modal.setAppElement('#app');
 

@@ -26,7 +26,7 @@ class Api::V1::CardsController < ApiController
     card = Card.find(params["card"]["id"])
     board = card.board
     if(verify_access(board) && card.update(card_params))
-      render json: card.board
+      render json: card
     else 
       render json: {errors: card.errors.full_messages}
     end
