@@ -4,6 +4,38 @@ Hello! Welcome to my launch academy breakable toy. My previous role was as a pro
 This task manager was built with the goal of keeping a user on task at the expense of unnecessary features that bloat the application. 
 
 There are more features I want to add, more technologies I want to integrate, etc. Please see the future features section toward the bottom of the approach section for more on that. 
+
+Production link: https://breakable-toy.onrender.com/ 
+
+## Setup
+Prerequisite: have Yarn installed, and Ruby version 2.7.3.
+
+1. Clone the repository
+    ```sh
+    git clone https://github.com/Ziming15/Menu-Launch-Academy-Breakable-Toy.git
+    ```
+
+2. Install Ruby gems
+    ```sh
+    bundle exec bundle install
+    ```
+
+3. Install Packages with Yarn
+    ```sh
+    yarn install
+    ```
+
+4. Start Ruby server
+    ```sh
+    rails server
+    ```
+
+5. Start webpack-dev-server
+    ```sh
+    yarn run start
+    ```
+
+6. Open the development site **[localhost:3000](http://localhost:3000)**
 ## Approach
 ### Technology
 Simply put, this is a React application with a Rails backend. The rails application was built using the make_it_so gem - https://github.com/LaunchAcademy/make_it_so 
