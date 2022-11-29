@@ -1,5 +1,4 @@
 class BoardSerializer < ActiveModel::Serializer
   belongs_to :user
-  has_many :cards
-  attributes :id, :name, :shortcode, :description, :user, :cards, :created_at
+  attributes :id, :name, :shortcode, :description, :user, :columns, :created_at
 end

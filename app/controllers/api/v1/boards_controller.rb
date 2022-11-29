@@ -11,7 +11,6 @@ class Api::V1::BoardsController < ApiController
   end
 
   def show
-  
     render json: Board.find(params['id'])
   end
 
@@ -27,7 +26,7 @@ class Api::V1::BoardsController < ApiController
 
   def destroy
     board = Board.find(params["id"])
-    if(verify_access(board))
+    if(board.verify_access(current_user))
       board.destroy
       render json: Board.all
     else
@@ -41,7 +40,4 @@ class Api::V1::BoardsController < ApiController
     params.require(:board).permit(:name, :shortcode, :description)
   end
 
-  def verify_access(board)
-    board.user == current_user
-  end
 end

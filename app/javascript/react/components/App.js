@@ -9,7 +9,7 @@ import {
   setUserThunk
 } from '../src/features/current-user/userSlice';
 import BoardList from '../src/features/board-list/BoardList';
-import Board from './Board';
+import Board from '../src/features/board-show/Board';
 import SignIn from './SignIn';
 import Profile from '../src/features/current-user/Profile';
 
@@ -18,16 +18,15 @@ export const App = (props) => {
   const profile = useSelector(currentProfile)
   const dispatch = useDispatch()
 
-
   Modal.setAppElement('#app');
 
   const [modalStatus, setModalStatus] = useState({
     openStatus: false,
     activeColumn: null,
+    columnList: [],
     activeCard: null,
     actionStatus: null
   })
-
 
   const handleOpen = (statusObj) => {
     setModalStatus(statusObj)
@@ -37,7 +36,9 @@ export const App = (props) => {
     setModalStatus({
       openStatus: false,
       activeColumn: null,
-      activeCard: null
+      columnList: [],
+      activeCard: null,
+      actionStatus: null
     })
   }
 
@@ -73,7 +74,7 @@ export const App = (props) => {
               userInfo={profile}
             />
           </Route>
-          <Route exact path="/users/:id">
+          <Route exact path="/profile/:id">
             <Profile userInfo={profile} />
           </Route>
         </Switch>
