@@ -19,7 +19,7 @@ const Profile = props => {
 
   const getUserBoards = async () => {
     try {
-      const response = await fetch(`/api/v1/users/${props.match.params.id}`)
+      const response = await fetch(`/api/v1/profile/${props.match.params.id}`)
       if (!response.ok) {
         const errorMessage = `${response.status} - ${response.statusText}`
         const error = new Error(errorMessage)
@@ -53,11 +53,11 @@ const Profile = props => {
 
   if (props.userInfo == null) {
     return (
-      <p>Something went wrong, please login to view this page</p>
+      <p>Loading</p>
     )
   } else if (props.userInfo == undefined) {
     return (
-      <p>Loading</p>
+      <p>Something went wrong, please login to view this page</p>
     )
   } else {
     return (

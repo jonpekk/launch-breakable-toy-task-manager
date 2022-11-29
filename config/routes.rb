@@ -3,7 +3,8 @@ Rails.application.routes.draw do
 
   get '/boards', to: 'static_pages#index'
   get '/boards/:id', to: 'static_pages#index'
-  get '/users/:id', to: 'static_pages#index'
+  get '/profile/:id', to: 'static_pages#index'
+  get '/sign-in', to: 'static_pages#index'
   devise_for :users
 
   namespace :api do

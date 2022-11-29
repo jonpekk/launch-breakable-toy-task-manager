@@ -90,7 +90,7 @@ export const App = (props) => {
               userInfo={userInfo}
             />
           </Route>
-          <Route exact path="/users/:id">
+          <Route exact path="/profile/:id">
             <Profile userInfo={userInfo} />
           </Route>
         </Switch>
