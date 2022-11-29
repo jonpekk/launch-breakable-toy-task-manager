@@ -72,8 +72,8 @@ export const App = (props) => {
               userInfo={profile}
             />
           </Route>
-          <Route exact path="/users/:id">
-            <Profile userInfo={profile} />
+          <Route exact path="/profile/:id">
+            <Profile userInfo={userInfo} />
           </Route>
         </Switch>
       </BrowserRouter>
