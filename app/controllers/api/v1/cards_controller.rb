@@ -6,7 +6,7 @@ class Api::V1::CardsController < ApiController
     card = Card.find(params["id"])
     board = Board.find(params["board_id"])
 
-    if(verify_access(board))
+    if(board.verify_access(current_user))
       render json: card
     end
   end
@@ -15,7 +15,7 @@ class Api::V1::CardsController < ApiController
     card = Card.new(create_card_params)
     board = Board.find(params["board_id"])
     card.board = board
-    if(verify_access(board) && card.save)
+    if(board.verify_access(current_user) && card.save)
       render json: card.board
     else 
       render json: card.errors.full_messages, status: 401
@@ -24,9 +24,9 @@ class Api::V1::CardsController < ApiController
   
   def update
     card = Card.find(params["card"]["id"])
-    board = card.board
-    if(verify_access(board) && card.update(card_params))
-      render json: card
+    board = card.board 
+    if(board.verify_access(current_user) && card.update(card_params))
+      render json: board
     else 
       render json: {errors: card.errors.full_messages}
     end
@@ -40,9 +40,5 @@ class Api::V1::CardsController < ApiController
 
   def create_card_params
     params.permit(:id, :name, :status, :description, :card_attachment)
-  end
-
-  def verify_access(board)
-    board.user == current_user
   end
 end

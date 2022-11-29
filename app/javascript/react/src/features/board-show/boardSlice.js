@@ -8,7 +8,7 @@ const boardSlice = createSlice({
       user: {
         id: undefined
       },
-      cards: []
+      columns: {}
     }
   },
   reducers: {
@@ -16,7 +16,6 @@ const boardSlice = createSlice({
       state.board = action.payload
     },
     patchCardCol: (state, action) => {
-      debugger
       state.board = action.payload
     }
   }

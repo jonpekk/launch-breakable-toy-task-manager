@@ -1,6 +1,5 @@
 import React from "react";
 import { useDrag } from "react-dnd";
-import { Link } from "react-router-dom";
 
 const Card = ({ name, id, openDetailModal }) => {
   const [{ isDragging }, drag] = useDrag(() => ({

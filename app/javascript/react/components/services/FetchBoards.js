@@ -33,7 +33,7 @@ class FetchBoards {
 
   static async patchCard(payload) {
     try {
-      const response = await fetch(`/api/v1/boards/${payload.board}/cards/${payload.card.id}`, {
+      const response = await fetch(`/api/v1/boards/${payload.card.board}/cards/${payload.card.id}`, {
         credentials: "same-origin",
         method: "PATCH",
         body: JSON.stringify(payload),

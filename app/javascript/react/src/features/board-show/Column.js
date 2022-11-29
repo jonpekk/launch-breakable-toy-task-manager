@@ -8,7 +8,6 @@ import boardSlice, {
 } from './boardSlice'
 
 const Column = (props) => {
-
   const dispatch = useDispatch()
 
   const handleDrop = (name, cardID) => {

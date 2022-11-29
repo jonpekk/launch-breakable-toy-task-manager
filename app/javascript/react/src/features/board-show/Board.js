@@ -42,16 +42,10 @@ const Board = (props) => {
     )
   }
 
-  const columns = ['BACKLOG', 'TO-DO', 'DOING', 'DONE']
-
-  const columnList = columns.map(column => {
-
-    const cards = board.cards.filter(card => {
-      return card.status.replace('_', '-').toUpperCase() === column
-    })
-
+  const columns = _.keys(board.columns)
+  const columnList = columns.map((column) => {
     return (
-      <Column name={column} cards={cards} key={column} handleOpen={props.handleOpen} modalStatus={props.modalStatus} />
+      <Column name={column.replace('_', '-').toUpperCase()} key={column} cards={board.columns[column]} handleOpen={props.handleOpen} modalStatus={props.modalStatus} />
     )
   })
 
@@ -82,7 +76,7 @@ const Board = (props) => {
           activeColumn={props.modalStatus.activeColumn}
           activeCard={props.modalStatus.activeCard}
           actionStatus={props.modalStatus.actionStatus}
-          columns={columns}
+          columns={board.columns}
           setRedirect={setRedirect}
         />
       </ReactModal>
