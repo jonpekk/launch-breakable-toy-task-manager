@@ -18,6 +18,7 @@ class Api::V1::CardsController < ApiController
     if(board.verify_access(current_user) && card.save)
       render json: card.board
     else 
+      binding.pry
       render json: card.errors.full_messages, status: 401
     end
   end

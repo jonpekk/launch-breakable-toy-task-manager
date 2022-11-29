@@ -3,9 +3,15 @@ import ErrorList from "./ErrorList";
 import _ from 'lodash'
 import Dropzone from "react-dropzone";
 import { withRouter } from "react-router-dom";
+import { useDispatch } from 'react-redux'
+import {
+  setBoard
+} from '../src/features/board-show/boardSlice'
 
 
 const ModalForm = (props) => {
+
+  const dispatch = useDispatch()
 
   const [formFields, setFormFields] = useState({
     name: "",
@@ -15,14 +21,11 @@ const ModalForm = (props) => {
   })
   const [errors, setErrors] = useState({})
 
-  const getStatusOptions = (columns) => {
-    const statusOptions = columns.map((option) => {
-      return (
-        <option value={option} key={option}>{option}</option>
-      )
-    })
-    return statusOptions
-  }
+  const statusOptions = props.columns.map((option) => {
+    return (
+      <option value={option.replace('_', '-').toUpperCase()} key={option}>{option.replace('_', '-').toUpperCase()}</option>
+    )
+  })
 
   const handleFileUpload = (acceptedFiles) => {
     setFormFields({
@@ -42,7 +45,7 @@ const ModalForm = (props) => {
       const response = await fetch(`/api/v1/boards/${props.match.params.id}/cards`, {
         credentials: "same-origin",
         method: "POST",
-        body: body,
+        body: body
       })
       if (!response.ok) {
         const errorMessage = `${response.status} ${response.statusText}`
@@ -50,7 +53,7 @@ const ModalForm = (props) => {
         throw (error)
       } else {
         const responseBody = await response.json()
-        props.setBoard(responseBody)
+        dispatch(setBoard(responseBody))
       }
     } catch (err) {
       console.log(err)
@@ -97,7 +100,7 @@ const ModalForm = (props) => {
           <div className="input-container large-3 medium-12 small-12 large-offset-1">
             <label htmlFor="status">Status</label>
             <select name="status" className="input-field" id="status" onChange={handleInput} value={formFields.status}>
-              {getStatusOptions(props.columns)}
+              {statusOptions}
             </select>
           </div>
         </div>

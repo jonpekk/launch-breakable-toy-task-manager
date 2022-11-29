@@ -45,7 +45,7 @@ const Board = (props) => {
   const columns = _.keys(board.columns)
   const columnList = columns.map((column) => {
     return (
-      <Column name={column.replace('_', '-').toUpperCase()} key={column} cards={board.columns[column]} handleOpen={props.handleOpen} modalStatus={props.modalStatus} />
+      <Column name={column.replace('_', '-').toUpperCase()} key={column} cards={board.columns[column]} handleOpen={props.handleOpen} modalStatus={props.modalStatus} columns={columns} />
     )
   })
 
@@ -76,7 +76,7 @@ const Board = (props) => {
           activeColumn={props.modalStatus.activeColumn}
           activeCard={props.modalStatus.activeCard}
           actionStatus={props.modalStatus.actionStatus}
-          columns={board.columns}
+          columns={columns}
           setRedirect={setRedirect}
         />
       </ReactModal>

@@ -23,10 +23,10 @@ export const App = (props) => {
   const [modalStatus, setModalStatus] = useState({
     openStatus: false,
     activeColumn: null,
+    columnList: [],
     activeCard: null,
     actionStatus: null
   })
-
 
   const handleOpen = (statusObj) => {
     setModalStatus(statusObj)
@@ -36,7 +36,9 @@ export const App = (props) => {
     setModalStatus({
       openStatus: false,
       activeColumn: null,
-      activeCard: null
+      columnList: [],
+      activeCard: null,
+      actionStatus: null
     })
   }
 
@@ -73,7 +75,7 @@ export const App = (props) => {
             />
           </Route>
           <Route exact path="/profile/:id">
-            <Profile userInfo={userInfo} />
+            <Profile userInfo={profile} />
           </Route>
         </Switch>
       </BrowserRouter>

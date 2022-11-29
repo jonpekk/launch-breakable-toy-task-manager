@@ -25,7 +25,7 @@ RSpec.describe Api::V1::BoardsController, type: :controller do
       returned_json = JSON.parse(response.body)
 
       expect(returned_json['id']).to eq(board_1.id)
-      expect(returned_json['cards'].first['id']).to eq(card_1.id)
+      expect(returned_json["columns"].first.last.first["id"]).to eq(card_1.id)
       expect(returned_json['user']['id']).to eq(board_1.user.id)
     end
   end

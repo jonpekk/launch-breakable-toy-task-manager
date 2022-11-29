@@ -21,7 +21,7 @@ const boardSlice = createSlice({
   }
 })
 
-const { setBoard, patchCardCol } = boardSlice.actions
+export const { setBoard, patchCardCol } = boardSlice.actions
 
 export const setBoardThunk = createAsyncThunk('setBoard', async (urlParam, { dispatch }) => {
   const board = await FetchBoards.getIndividualBoard(urlParam)

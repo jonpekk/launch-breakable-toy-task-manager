@@ -22,32 +22,6 @@ const Column = (props) => {
     dispatch(patchCardColThunk(cardPayload))
   }
 
-  const changeColumn = async (payload) => {
-    try {
-      const response = await fetch(`/api/v1/boards/${props.match.params.id}/cards/${payload.card.id}`, {
-        credentials: "same-origin",
-        method: "PATCH",
-        body: JSON.stringify(payload),
-        headers: {
-          "Accept": "application/json",
-          "Content-type": "application/json"
-        }
-      })
-      if (!response.ok) {
-        const errorMessage = `${response.status} - ${response.statusText}`
-        const error = new Error(errorMessage)
-        throw (error)
-      } else {
-        if (response.status === 200) {
-          const responseBody = await response.json()
-          props.setBoard(responseBody)
-        }
-      }
-    } catch (err) {
-      console.log(`Error! ${err}`)
-    }
-  }
-
   const setCards = () => {
     setColumnCards(props.cards)
   }
@@ -66,6 +40,7 @@ const Column = (props) => {
       ...props.modalStatus,
       openStatus: true,
       activeColumn: props.name,
+      columnList: props.columns,
       actionStatus: "view",
       activeCard: cardID
     })
