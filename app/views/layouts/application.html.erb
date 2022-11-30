@@ -17,7 +17,7 @@
     <section class="top-nav-section">
       <ul class="right">
         <%- if current_user -%>
-          <li><%= link_to 'Profile', "/users/#{current_user["id"]}", class: 'negative-link' %></li>
+          <li><%= link_to 'Profile', "/profile/#{current_user["id"]}", class: 'negative-link' %></li>
           <li><%= link_to 'Sign Out', destroy_user_session_path, method: :delete, class: 'negative-link' %></li>
         <%- else -%>
           <li><%= link_to 'Sign Up', new_user_registration_path, class: 'negative-link' %></li>

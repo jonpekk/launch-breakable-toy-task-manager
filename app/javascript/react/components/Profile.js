@@ -19,7 +19,7 @@ const Profile = props => {
 
   const getUserBoards = async () => {
     try {
-      const response = await fetch(`/api/v1/profile/${props.match.params.id}`)
+      const response = await fetch(`/api/v1/current-user`)
       if (!response.ok) {
         const errorMessage = `${response.status} - ${response.statusText}`
         const error = new Error(errorMessage)
