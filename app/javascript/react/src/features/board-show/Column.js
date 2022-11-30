@@ -3,7 +3,7 @@ import { useDrop } from "react-dnd";
 import { withRouter } from "react-router-dom";
 import Card from './Card';
 import { useDispatch } from "react-redux";
-import boardSlice, {
+import {
   patchCardColThunk,
 } from './boardSlice'
 
