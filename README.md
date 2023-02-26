@@ -13,7 +13,8 @@ Prerequisite: have Yarn installed, and Ruby version 2.7.3.
 1. Clone the repository
     ```sh
 https://github.com/jonpekk/launch-breakable-toy-task-manager.git
-    ```
+
+```
 
 2. Install Ruby gems
     ```sh
